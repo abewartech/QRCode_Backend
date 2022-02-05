@@ -41,7 +41,7 @@ class ScanHistoryCrudController extends CrudController
     {
         $this->crud->removeAllButtons();
         CRUD::column('name');
-        CRUD::column('qr_codes_id');
+        CRUD::column('qr_codes_id')->type('select')->entity('qrCode')->attribute('name')->model('App\Models\QRCode');
         CRUD::column('created_at')->type('datetime')->label('Timestamp');
         /**
          * Columns can be defined using the fluent syntax or array syntax:
