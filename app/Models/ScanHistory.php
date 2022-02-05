@@ -34,6 +34,10 @@ class ScanHistory extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function qrCode()
+    {
+        return $this->belongsTo('App\Models\QRCode', 'qr_codes_id');
+    }
 
     /*
     |--------------------------------------------------------------------------
