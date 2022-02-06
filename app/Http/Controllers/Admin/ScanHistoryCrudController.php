@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\ScanHistoryRequest;
+use App\Models\ScanHistory;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -79,5 +80,13 @@ class ScanHistoryCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function reset()
+    {
+        ScanHistory::truncate();
+
+        \Alert::success('Data has been reset')->flash();
+        return redirect('dashboard');
     }
 }

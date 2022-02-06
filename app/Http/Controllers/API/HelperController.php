@@ -6,6 +6,7 @@ use App\Events\QRScan;
 use App\Http\Controllers\Controller;
 use App\Models\QRCode;
 use App\Models\ScanHistory;
+use Carbon\Carbon;
 
 class HelperController extends Controller
 {
@@ -13,10 +14,10 @@ class HelperController extends Controller
     {
         $qrcode = QRCode::where('name', request('qr'))->first();
 
-        $scan = new ScanHistory;
-        $scan->name = request('name');
-        $scan->qr_codes_id = $qrcode->id;
-        $scan->save();
+        $scan = ScanHistory::updateOrCreate(
+            ['name', request('name') . Carbon::now()->parse('Hi')],
+            ['qr_codes_id' => $qrcode->id]
+        );
 
         try {
             event(new QRScan($scan->qr_codes_id));
