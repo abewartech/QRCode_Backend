@@ -40,6 +40,7 @@ class ScanHistoryCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->crud->removeAllButtons();
+        $this->crud->enableExportButtons();
         CRUD::column('name');
         CRUD::column('qr_codes_id')->type('select')->entity('qrCode')->attribute('name')->model('App\Models\QRCode');
         CRUD::column('created_at')->type('datetime')->label('Timestamp');

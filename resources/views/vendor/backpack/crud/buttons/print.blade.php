@@ -1,0 +1,1 @@
+<a href="{{ url($crud->route.'/'.$entry->getKey().'/print') }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-link"><i class="las la-print"></i> Print</a>

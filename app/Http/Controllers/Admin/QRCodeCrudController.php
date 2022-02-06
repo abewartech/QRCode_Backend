@@ -6,6 +6,7 @@ use App\Http\Requests\QRCodeRequest;
 use App\Models\QRCode as ModelsQRCode;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /**
@@ -46,6 +47,7 @@ class QRCodeCrudController extends CrudController
     function setupListOperation()
     {
         $this->crud->denyAccess('show');
+        $this->crud->addButtonFromView('line', 'print', 'print', 'end');
         CRUD::column('name');
         CRUD::column('qrcode')->type('qrcode');
 
@@ -131,5 +133,15 @@ class QRCodeCrudController extends CrudController
         $qrcode->update();
 
         return $response;
+    }
+
+    function print($id) {
+        $qrcode = ModelsQRCode::find($id);
+        $result = QrCode::size(300)->generate($qrcode->name);
+
+        $logo = "data:image/svg+xml;base64,". base64_encode($result);
+
+        $pdf = PDF::loadView('pdf.qr', compact('logo'));
+        return $pdf->download('qr.pdf');
     }
 }
