@@ -15,8 +15,7 @@ class HelperController extends Controller
         $qrcode = QRCode::where('name', request('qr'))->first();
 
         $scan = ScanHistory::updateOrCreate(
-            ['name' => request('name') . Carbon::now()->format('Hi')],
-            ['qr_codes_id' => $qrcode->id]
+            ['name' => request('name') . Carbon::now()->format('Hi'), 'qr_codes_id' => $qrcode->id]
         );
 
         try {
