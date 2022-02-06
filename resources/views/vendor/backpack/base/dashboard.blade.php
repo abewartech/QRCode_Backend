@@ -16,3 +16,18 @@
     @endforeach
 </div>
 @endsection
+@push('after_scripts')
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script>
+    Pusher.logToConsole = false;
+
+    var pusher = new Pusher('0bbbd5d4e4774ee63d12', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+        window.location.reload();
+    });
+  </script>
+@endpush

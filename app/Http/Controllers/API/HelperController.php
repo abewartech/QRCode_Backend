@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\QRScan;
 use App\Http\Controllers\Controller;
 use App\Models\QRCode;
 use App\Models\ScanHistory;
@@ -16,6 +17,12 @@ class HelperController extends Controller
         $scan->name = request('name');
         $scan->qr_codes_id = $qrcode->id;
         $scan->save();
+
+        try {
+            event(new QRScan($scan->name));
+        } catch (\Exception $error) {
+
+        }
 
         return response()->json([
             'success' => true,
