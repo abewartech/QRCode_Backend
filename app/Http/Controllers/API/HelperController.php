@@ -19,7 +19,7 @@ class HelperController extends Controller
         $scan->save();
 
         try {
-            event(new QRScan($scan->name));
+            event(new QRScan($scan->qr_codes_id));
         } catch (\Exception $error) {
 
         }
