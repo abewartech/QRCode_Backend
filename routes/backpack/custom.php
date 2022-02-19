@@ -21,4 +21,5 @@ Route::group([
     Route::crud('scan-history', 'ScanHistoryCrudController');
     Route::get('q-r-code/{id}/print', 'QRCodeCrudController@print');
     Route::get('reset', 'ScanHistoryCrudController@reset');
+    Route::crud('doktrin', 'DoktrinCrudController');
 }); // this should be the absolute last line of this file

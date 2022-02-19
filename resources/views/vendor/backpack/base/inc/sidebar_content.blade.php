@@ -4,3 +4,4 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i>
         <span>Users</span></a></li>
 @endrole
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('doktrin') }}'><i class='nav-icon la la-question'></i> Doktrins</a></li>
