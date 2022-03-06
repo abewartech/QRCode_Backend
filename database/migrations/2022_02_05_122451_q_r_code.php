@@ -13,12 +13,12 @@ class QRCode extends Migration
      */
     public function up()
     {
-        Schema::create('qr_codes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->longText('qrcode')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('qr_codes', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name')->unique();
+        //     $table->longText('qrcode')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -28,6 +28,6 @@ class QRCode extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qr_codes');
+        // Schema::dropIfExists('qr_codes');
     }
 }

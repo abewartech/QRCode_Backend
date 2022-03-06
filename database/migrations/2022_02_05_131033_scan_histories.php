@@ -13,12 +13,12 @@ class ScanHistories extends Migration
      */
     public function up()
     {
-        Schema::create('scan_histories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
-            $table->integer('qr_codes_id');
-            $table->timestamps();
-        });
+        // Schema::create('scan_histories', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name')->nullable();
+        //     $table->integer('qr_codes_id');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -28,6 +28,6 @@ class ScanHistories extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scan_histories');
+        // Schema::dropIfExists('scan_histories');
     }
 }

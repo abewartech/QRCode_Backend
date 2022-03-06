@@ -64,13 +64,10 @@ class DoktrinCrudController extends CrudController
     {
         CRUD::setValidation(DoktrinRequest::class);
 
-        CRUD::field('id');
         CRUD::field('no_doktrin');
         CRUD::field('name');
-        CRUD::field('tgl');
-        CRUD::field('file');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
+        CRUD::field('tgl')->type('date');
+        CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
