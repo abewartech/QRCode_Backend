@@ -23,4 +23,11 @@ Route::group([
     Route::get('reset', 'ScanHistoryCrudController@reset');
     Route::crud('doktrin', 'DoktrinCrudController');
     Route::get('doktrin/{id}/download', 'DoktrinCrudController@download');
+    Route::get('doktrin/{id}/preview', 'DoktrinCrudController@previewpdf');
+    Route::crud('doktrin-fungsi-umum', 'DoktrinFungsiUmumCrudController');
+    Route::crud('doktrin-fungsi-khusus', 'DoktrinFungsiKhususCrudController');
+    Route::crud('jukgar', 'JukgarCrudController');
+    Route::crud('juknis', 'JuknisCrudController');
+    Route::crud('jukref', 'JukrefCrudController');
+    Route::crud('protap', 'ProtapCrudController');
 }); // this should be the absolute last line of this file
