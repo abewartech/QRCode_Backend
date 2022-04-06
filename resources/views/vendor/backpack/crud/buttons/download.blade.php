@@ -1,0 +1,1 @@
+<a href="{{ url($crud->route.'/'.$entry->getKey().'/download') }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-link"><i class="las la-cloud-download-alt"></i> Download</a>
