@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Doktrin extends Migration
+class Jukgar extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class Doktrin extends Migration
      */
     public function up()
     {
-        Schema::create('doktrins', function (Blueprint $table) {
+        Schema::create('jukgars', function (Blueprint $table) {
             $table->id();
-            $table->string('no_doktrin');
+            $table->string('no_petunjuk');
             $table->string('name');
             $table->date('tgl');
             $table->string('file');
@@ -31,6 +31,6 @@ class Doktrin extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doktrins');
+        Schema::dropIfExists('jukgars');
     }
 }

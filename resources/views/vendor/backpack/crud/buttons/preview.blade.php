@@ -1,0 +1,1 @@
+<a href="{{ url($crud->route.'/'.$entry->getKey().'/preview') }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-link"><i class="las la-eye"></i> Preview</a>

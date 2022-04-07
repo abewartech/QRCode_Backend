@@ -60,6 +60,7 @@ return [
 
         // Example (load font-awesome instead of line-awesome):
         // 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css',
+        'custom/custom.min.css'
     ],
 
     // CSS files that are loaded in all pages, using Laravel's mix() helper

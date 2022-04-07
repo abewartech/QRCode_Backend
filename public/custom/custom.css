@@ -1,0 +1,6 @@
+.background-login {
+    background-image: url(../tni.jpeg);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
