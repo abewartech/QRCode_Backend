@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\DoktrinFungsiUmumRequest;
+use App\Models\DoktrinFungsiUmum;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -28,7 +29,7 @@ class DoktrinFungsiUmumCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\DoktrinFungsiUmum::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/doktrin-fungsi-umum');
-        CRUD::setEntityNameStrings('doktrin fungsi umum', 'doktrin fungsi umums');
+        CRUD::setEntityNameStrings('doktrin fungsi umum', 'doktrin fungsi umum');
     }
 
     /**
@@ -39,14 +40,17 @@ class DoktrinFungsiUmumCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->addButtonFromView('line', 'preview', 'preview', 'end');
+        $this->crud->addButtonFromView('line', 'download', 'download', 'end');
+        $this->crud->denyAccess('show');
         CRUD::column('id');
         CRUD::column('no_doktrin');
         CRUD::column('name');
         CRUD::column('tgl');
-        CRUD::column('file');
+        // CRUD::column('file');
         CRUD::column('pembina');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        // CRUD::column('created_at');
+        // CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -65,14 +69,14 @@ class DoktrinFungsiUmumCrudController extends CrudController
     {
         CRUD::setValidation(DoktrinFungsiUmumRequest::class);
 
-        CRUD::field('id');
+        // CRUD::field('id');
         CRUD::field('no_doktrin');
         CRUD::field('name');
-        CRUD::field('tgl');
-        CRUD::field('file');
+        CRUD::field('tgl')->type('date');
+        CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
         CRUD::field('pembina');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
+        // CRUD::field('created_at');
+        // CRUD::field('updated_at');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -90,5 +94,19 @@ class DoktrinFungsiUmumCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function download($id)
+    {
+        $doktrin = DoktrinFungsiUmum::find($id);
+        $file_path = public_path($doktrin->file);
+        return response()->download($file_path);
+    }
+
+    public function previewpdf($id)
+    {
+        $doktrin = DoktrinFungsiUmum::find($id);
+        $file_path = public_path($doktrin->file);
+        return response()->file($file_path);
     }
 }

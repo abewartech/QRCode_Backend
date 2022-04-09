@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\JukgarRequest;
+use App\Models\Jukgar;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -21,7 +22,7 @@ class JukgarCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,31 +34,34 @@ class JukgarCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
+        $this->crud->addButtonFromView('line', 'preview', 'preview', 'end');
+        $this->crud->addButtonFromView('line', 'download', 'download', 'end');
+        $this->crud->denyAccess('show');
         CRUD::column('id');
         CRUD::column('no_petunjuk');
         CRUD::column('name');
         CRUD::column('tgl');
-        CRUD::column('file');
+        // CRUD::column('file');
         CRUD::column('pembina');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        // CRUD::column('created_at');
+        // CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -65,30 +69,44 @@ class JukgarCrudController extends CrudController
     {
         CRUD::setValidation(JukgarRequest::class);
 
-        CRUD::field('id');
+        // CRUD::field('id');
         CRUD::field('no_petunjuk');
         CRUD::field('name');
-        CRUD::field('tgl');
-        CRUD::field('file');
+        CRUD::field('tgl')->type('date');
+        CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
         CRUD::field('pembina');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
+        // CRUD::field('created_at');
+        // CRUD::field('updated_at');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function download($id)
+    {
+        $doktrin = Jukgar::find($id);
+        $file_path = public_path($doktrin->file);
+        return response()->download($file_path);
+    }
+
+    public function previewpdf($id)
+    {
+        $doktrin = Jukgar::find($id);
+        $file_path = public_path($doktrin->file);
+        return response()->file($file_path);
     }
 }

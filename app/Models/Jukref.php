@@ -28,6 +28,14 @@ class Jukref extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function setFileAttribute($value)
+    {
+        $attribute_name = "file";
+        $disk = "public_beneran";
+        $destination_path = 'file/' . date("Ymd");
+
+        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+    }
 
     /*
     |--------------------------------------------------------------------------
