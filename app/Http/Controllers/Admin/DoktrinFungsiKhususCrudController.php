@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\DoktrinFungsiKhususRequest;
+use App\Models\DoktrinFungsiKhusus;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -39,7 +40,15 @@ class DoktrinFungsiKhususCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        
+        $this->crud->addButtonFromView('line', 'preview', 'preview', 'end');
+        $this->crud->addButtonFromView('line', 'download', 'download', 'end');
+        $this->crud->denyAccess('show');
+        CRUD::column('id');
+        CRUD::column('no_doktrin');
+        CRUD::column('name');
+        CRUD::column('tgl');
+        // CRUD::column('file');
+        CRUD::column('pembina');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -58,7 +67,11 @@ class DoktrinFungsiKhususCrudController extends CrudController
     {
         CRUD::setValidation(DoktrinFungsiKhususRequest::class);
 
-        
+        CRUD::field('no_doktrin');
+        CRUD::field('name');
+        CRUD::field('tgl')->type('date');
+        CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
+        CRUD::field('pembina');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -76,5 +89,19 @@ class DoktrinFungsiKhususCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function download($id)
+    {
+        $doktrin = DoktrinFungsiKhusus::find($id);
+        $file_path = public_path($doktrin->file);
+        return response()->download($file_path);
+    }
+
+    public function previewpdf($id)
+    {
+        $doktrin = DoktrinFungsiKhusus::find($id);
+        $file_path = public_path($doktrin->file);
+        return response()->file($file_path);
     }
 }

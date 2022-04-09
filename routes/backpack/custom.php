@@ -30,4 +30,16 @@ Route::group([
     Route::crud('juknis', 'JuknisCrudController');
     Route::crud('jukref', 'JukrefCrudController');
     Route::crud('protap', 'ProtapCrudController');
+    Route::get('doktrin-fungsi-umum/{id}/download', 'DoktrinFungsiUmumCrudController@download');
+    Route::get('doktrin-fungsi-umum/{id}/preview', 'DoktrinFungsiUmumCrudController@previewpdf');
+    Route::get('doktrin-fungsi-khusus/{id}/download', 'DoktrinFungsiKhususCrudController@download');
+    Route::get('doktrin-fungsi-khusus/{id}/preview', 'DoktrinFungsiKhususCrudController@previewpdf');
+    Route::get('jukgar/{id}/download', 'JukgarCrudController@download');
+    Route::get('jukgar/{id}/preview', 'JukgarCrudController@previewpdf');
+    Route::get('juknis/{id}/download', 'JuknisCrudController@download');
+    Route::get('juknis/{id}/preview', 'JuknisCrudController@previewpdf');
+    Route::get('jukref/{id}/download', 'JukrefCrudController@download');
+    Route::get('jukref/{id}/preview', 'JukrefCrudController@previewpdf');
+    Route::get('protap/{id}/download', 'ProtapCrudController@download');
+    Route::get('protap/{id}/preview', 'ProtapCrudController@previewpdf');
 }); // this should be the absolute last line of this file

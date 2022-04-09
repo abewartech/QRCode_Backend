@@ -29,7 +29,7 @@ class DoktrinCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Doktrin::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/doktrin');
-        CRUD::setEntityNameStrings('doktrin', 'doktrin');
+        CRUD::setEntityNameStrings('doktrin operasi', 'doktrin operasi');
     }
 
     /**
@@ -47,7 +47,8 @@ class DoktrinCrudController extends CrudController
         CRUD::column('no_doktrin');
         CRUD::column('name');
         CRUD::column('tgl');
-        CRUD::column('file');
+        CRUD::column('pembina');
+        // CRUD::column('file');
         // CRUD::column('created_at');
         // CRUD::column('updated_at');
 
@@ -71,6 +72,7 @@ class DoktrinCrudController extends CrudController
         CRUD::field('no_doktrin');
         CRUD::field('name');
         CRUD::field('tgl')->type('date');
+        CRUD::field('pembina');
         CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
 
         /**
