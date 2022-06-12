@@ -43,7 +43,7 @@ class UserCrudController extends CrudController
         $this->crud->denyAccess('show');
         CRUD::column('name');
         CRUD::column('username');
-        CRUD::column('email');
+        // CRUD::column('email');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -73,11 +73,11 @@ class UserCrudController extends CrudController
                 'label' => 'Username',
                 'type' => 'text',
             ],
-            [
-                'name' => 'email',
-                'label' => trans('backpack::permissionmanager.email'),
-                'type' => 'email',
-            ],
+            // [
+            //     'name' => 'email',
+            //     'label' => trans('backpack::permissionmanager.email'),
+            //     'type' => 'email',
+            // ],
             [
                 'name' => 'password',
                 'label' => trans('backpack::permissionmanager.password'),
