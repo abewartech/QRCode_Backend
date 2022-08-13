@@ -30,6 +30,9 @@ class ProtapCrudController extends CrudController
         CRUD::setModel(\App\Models\Protap::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/protap');
         CRUD::setEntityNameStrings('protap', 'protaps');
+        if (!backpack_user()->can('view_protected_document')) {
+            $this->crud->addClause('where', 'is_protected', '0');
+        }
     }
 
     /**
@@ -76,6 +79,7 @@ class ProtapCrudController extends CrudController
         CRUD::field('tgl')->type('date');
         CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
         CRUD::field('pembina');
+        CRUD::field('is_protected')->type('checkbox');
         // CRUD::field('created_at');
         // CRUD::field('updated_at');
 
