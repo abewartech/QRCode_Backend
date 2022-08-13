@@ -30,6 +30,9 @@ class JukgarCrudController extends CrudController
         CRUD::setModel(\App\Models\Jukgar::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/jukgar');
         CRUD::setEntityNameStrings('jukgar', 'jukgars');
+        if (!backpack_user()->can('view_protected_document')) {
+            $this->crud->addClause('where', 'is_protected', '0');
+        }
     }
 
     /**
@@ -75,6 +78,7 @@ class JukgarCrudController extends CrudController
         CRUD::field('tgl')->type('date');
         CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
         CRUD::field('pembina');
+        CRUD::field('is_protected')->type('checkbox');
         // CRUD::field('created_at');
         // CRUD::field('updated_at');
 

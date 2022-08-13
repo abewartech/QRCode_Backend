@@ -100,6 +100,15 @@ class UserCrudController extends CrudController
                     return $query->select('name','id')->where('name', '<>', 'superadmin')->pluck('name','id');
                 }),
             ],
+            [
+                'label' => 'Permission',
+                'type' => 'checklist',
+                'name' => 'permissions',
+                'entity' => 'permissions',
+                'attribute' => 'name',
+                'model' => "Backpack\PermissionManager\app\Models\Permission",
+                'pivot' => true,
+            ],
         ]);
 
         /**

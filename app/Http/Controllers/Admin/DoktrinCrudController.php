@@ -30,6 +30,9 @@ class DoktrinCrudController extends CrudController
         CRUD::setModel(\App\Models\Doktrin::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/doktrin');
         CRUD::setEntityNameStrings('doktrin operasi', 'doktrin operasi');
+        if (!backpack_user()->can('view_protected_document')) {
+            $this->crud->addClause('where', 'is_protected', '0');
+        }
     }
 
     /**
@@ -74,6 +77,7 @@ class DoktrinCrudController extends CrudController
         CRUD::field('tgl')->type('date');
         CRUD::field('pembina');
         CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
+        CRUD::field('is_protected')->type('checkbox');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

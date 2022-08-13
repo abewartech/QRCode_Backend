@@ -20,6 +20,7 @@ class DoktrinFungsiUmum extends Migration
             $table->date('tgl');
             $table->string('file');
             $table->string('pembina')->nullable();
+            $table->enum('is_protected', ['0', '1'])->default('0');
             $table->timestamps();
         });
     }

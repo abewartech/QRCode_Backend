@@ -30,6 +30,9 @@ class DoktrinFungsiKhususCrudController extends CrudController
         CRUD::setModel(\App\Models\DoktrinFungsiKhusus::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/doktrin-fungsi-khusus');
         CRUD::setEntityNameStrings('doktrin fungsi khusus', 'doktrin fungsi khusus');
+        if (!backpack_user()->can('view_protected_document')) {
+            $this->crud->addClause('where', 'is_protected', '0');
+        }
     }
 
     /**
@@ -49,6 +52,7 @@ class DoktrinFungsiKhususCrudController extends CrudController
         CRUD::column('tgl');
         // CRUD::column('file');
         CRUD::column('pembina');
+        
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -72,6 +76,7 @@ class DoktrinFungsiKhususCrudController extends CrudController
         CRUD::field('tgl')->type('date');
         CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
         CRUD::field('pembina');
+        CRUD::field('is_protected')->type('checkbox');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
