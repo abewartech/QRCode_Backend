@@ -30,9 +30,10 @@ class DoktrinFungsiKhususCrudController extends CrudController
         CRUD::setModel(\App\Models\DoktrinFungsiKhusus::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/doktrin-fungsi-khusus');
         CRUD::setEntityNameStrings('doktrin fungsi khusus', 'doktrin fungsi khusus');
+        if (backpack_user()->hasRole('user')) {
         if (!backpack_user()->can('view_protected_document')) {
             $this->crud->addClause('where', 'is_protected', '0');
-        }
+        }}
     }
 
     /**

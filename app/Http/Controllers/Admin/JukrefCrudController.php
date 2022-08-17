@@ -30,9 +30,11 @@ class JukrefCrudController extends CrudController
         CRUD::setModel(\App\Models\Jukref::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/jukref');
         CRUD::setEntityNameStrings('jukref', 'jukrefs');
+        if (backpack_user()->hasRole('user')) {
         if (!backpack_user()->can('view_protected_document')) {
             $this->crud->addClause('where', 'is_protected', '0');
         }
+    }
     }
 
     /**

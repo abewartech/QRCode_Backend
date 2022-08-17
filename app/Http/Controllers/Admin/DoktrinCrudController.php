@@ -30,8 +30,10 @@ class DoktrinCrudController extends CrudController
         CRUD::setModel(\App\Models\Doktrin::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/doktrin');
         CRUD::setEntityNameStrings('doktrin operasi', 'doktrin operasi');
-        if (!backpack_user()->can('view_protected_document')) {
-            $this->crud->addClause('where', 'is_protected', '0');
+        if (backpack_user()->hasRole('user')) {
+            if (!backpack_user()->can('view_protected_document')) {
+                $this->crud->addClause('where', 'is_protected', '0');
+            }
         }
     }
 
