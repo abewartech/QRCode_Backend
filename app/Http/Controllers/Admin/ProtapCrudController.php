@@ -30,10 +30,11 @@ class ProtapCrudController extends CrudController
         CRUD::setModel(\App\Models\Protap::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/protap');
         CRUD::setEntityNameStrings('protap', 'protaps');
+        if (backpack_user()->hasRole('user')) {
         if (!backpack_user()->can('view_protected_document')) {
             $this->crud->addClause('where', 'is_protected', '0');
         }
-    }
+    }}
 
     /**
      * Define what happens when the List operation is loaded.
