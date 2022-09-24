@@ -31,8 +31,9 @@ class JuknisCrudController extends CrudController
         CRUD::setRoute(config('backpack.base.route_prefix') . '/juknis');
         CRUD::setEntityNameStrings('juknis', 'juknis');
         if (backpack_user()->hasRole('user')) {
-        if (!backpack_user()->can('view_protected_document')) {
-            $this->crud->addClause('where', 'is_protected', '0');
+//        if (!backpack_user()->can('view_protected_document')) {
+ if (!count(backpack_user()->permissions) > 0) {  
+          $this->crud->addClause('where', 'is_protected', '0');
         }}
     }
 
