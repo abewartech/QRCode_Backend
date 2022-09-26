@@ -25,20 +25,16 @@ class UserSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ),
             array(
-                'name' => 'admin', 'guard_name' => 'web', 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ),
-            array(
                 'name' => 'user', 'guard_name' => 'web', 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ),
         ));
 
         DB::table($config['permissions'])->insert(array(
-            array(
-                'name' => 'view_protected_document', 'guard_name' => 'web', 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ),
+            // array(
+            //     'name' => 'view_protected_document', 'guard_name' => 'web', 'created_at' => Carbon::now(),
+            //     'updated_at' => Carbon::now(),
+            // ),
         ));
 
         $user1 = User::create([
@@ -50,18 +46,27 @@ class UserSeeder extends Seeder
         ]);
         $user1->assignRole('superadmin');
 
-        $user2 = User::create([
-            'name' => 'Admin',
-            'username' => 'admin',
+        $user3 = User::create([
+            'name' => 'Abe',
+            'username' => 'abe',
             'password' => Hash::make('123456'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        $user2->assignRole('admin');
+        $user3->assignRole('user');
 
         $user3 = User::create([
-            'name' => 'User',
-            'username' => 'user',
+            'name' => 'Octo',
+            'username' => 'octo',
+            'password' => Hash::make('123456'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        $user3->assignRole('user');
+
+        $user3 = User::create([
+            'name' => 'Yori',
+            'username' => 'yori',
             'password' => Hash::make('123456'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Doktrin extends Migration
+class Attendances extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class Doktrin extends Migration
      */
     public function up()
     {
-        Schema::create('doktrins', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('no_doktrin');
-            $table->string('name');
-            $table->date('tgl');
-            $table->string('file');
-            $table->string('pembina')->nullable();
-            $table->enum('is_protected', ['0', '1'])->default('0');
+            $table->integer('user_id');
+            $table->decimal('latitude', 10, 6)->nullable();
+            $table->decimal('longitude', 11, 6)->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class Doktrin extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doktrins');
+        Schema::dropIfExists('attendances');
     }
 }

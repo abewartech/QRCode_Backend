@@ -42,4 +42,5 @@ Route::group([
     Route::get('jukref/{id}/preview', 'JukrefCrudController@previewpdf');
     Route::get('protap/{id}/download', 'ProtapCrudController@download');
     Route::get('protap/{id}/preview', 'ProtapCrudController@previewpdf');
+    Route::crud('attendance', 'AttendanceCrudController');
 }); // this should be the absolute last line of this file
