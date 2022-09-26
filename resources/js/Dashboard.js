@@ -36,7 +36,7 @@ class Dashboard extends Component {
                     isPointWithinRadius(
                         { latitude: lat, longitude: lng },
                         { latitude: -6.225714, longitude: 106.850357 },
-                        3000000
+                        3000
                     )
                 ) {
                     const data = {
