@@ -34,6 +34,10 @@ class Attendance extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function userId()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

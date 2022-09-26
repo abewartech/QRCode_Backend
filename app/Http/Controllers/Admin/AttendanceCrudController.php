@@ -41,7 +41,7 @@ class AttendanceCrudController extends CrudController
     {
         $this->crud->denyAccess('create');
         CRUD::column('id');
-        CRUD::column('user_id');
+        CRUD::column('user_id')->type('select')->entity('userId')->attribute('name')->model('App\Models\User');
         CRUD::column('latitude');
         CRUD::column('longitude');
         CRUD::column('created_at');
