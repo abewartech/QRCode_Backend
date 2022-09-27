@@ -10,8 +10,9 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@babel/preset-react": "^7.13.13",
+        "@babel/preset-react": "^7.18.6",
         "axios": "^0.21",
+        "file-loader": "^6.2.0",
         "laravel-mix": "^6.0.6",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
@@ -19,9 +20,16 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.18.6",
+        "@babel/plugin-proposal-decorators": "^7.19.1",
+        "@babel/plugin-proposal-private-methods": "^7.18.6",
+        "@babel/plugin-proposal-private-property-in-object": "^7.18.6",
+        "@babel/plugin-syntax-jsx": "^7.18.6",
         "@emotion/react": "^11.10.4",
         "@emotion/styled": "^11.10.4",
         "@mui/material": "^5.10.6",
-        "geolib": "^3.3.3"
+        "babel-preset-es2015": "^6.24.1",
+        "geolib": "^3.3.3",
+        "raw-loader": "^4.0.2"
     }
 }

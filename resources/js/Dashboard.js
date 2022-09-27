@@ -54,6 +54,19 @@ class Dashboard extends Component {
                                 msg: "Terimakasih",
                                 disable: true,
                             });
+                            var tinung = `${window.location.origin}/terimakasih.ogg`;
+                            var audio = document.createElement("audio");
+
+                            audio.autoplay = true;
+                            audio.load();
+                            audio.addEventListener(
+                                "load",
+                                function() {
+                                    audio.play();
+                                },
+                                true
+                            );
+                            audio.src = tinung;
                         })
                         .catch(function (error) {
                             console.log(error);
