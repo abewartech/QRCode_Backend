@@ -46,14 +46,14 @@ class UserSeeder extends Seeder
         ]);
         $user1->assignRole('superadmin');
 
-        $user3 = User::create([
+        $user2 = User::create([
             'name' => 'Abe',
             'username' => 'abe',
             'password' => Hash::make('123456'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        $user3->assignRole('user');
+        $user2->assignRole('user');
 
         $user3 = User::create([
             'name' => 'Octo',
@@ -64,14 +64,59 @@ class UserSeeder extends Seeder
         ]);
         $user3->assignRole('user');
 
-        $user3 = User::create([
+        $user4 = User::create([
             'name' => 'Yori',
             'username' => 'yori',
             'password' => Hash::make('123456'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        $user3->assignRole('user');
+        $user4->assignRole('user');
+
+        $user5 = User::create([
+            'name' => 'Cindy',
+            'username' => 'cindy',
+            'password' => Hash::make('123456'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        $user5->assignRole('user');
+
+        $user6 = User::create([
+            'name' => 'Hendra',
+            'username' => 'hendra',
+            'password' => Hash::make('123456'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        $user6->assignRole('user');
+
+        $user7 = User::create([
+            'name' => 'Fahmi',
+            'username' => 'fahmi',
+            'password' => Hash::make('123456'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        $user7->assignRole('user');
+
+        $user8 = User::create([
+            'name' => 'Bayu',
+            'username' => 'bayu',
+            'password' => Hash::make('123456'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        $user8->assignRole('user');
+
+        $user9 = User::create([
+            'name' => 'Putra',
+            'username' => 'putra',
+            'password' => Hash::make('123456'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        $user9->assignRole('user');
 
     }
 }
