@@ -39,7 +39,8 @@ class AttendanceCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->denyAccess('create');
+        $this->crud->removeAllButtons();
+        $this->crud->enableExportButtons();
         CRUD::column('id');
         CRUD::column('user_id')->type('select')->entity('userId')->attribute('name')->model('App\Models\User');
         CRUD::column('latitude');
