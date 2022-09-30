@@ -132,13 +132,14 @@ class Dashboard extends Component {
                 <div class="container">
                     <div
                         className="row justify-content-center"
-                        style={{ marginTop: 20 }}
+                        style={{ marginTop: 30 }}
                     >
-                        <div className="col-3">
+                        <div className="col-4">
                             <Button
                                 variant="contained"
                                 onClick={absen}
                                 disabled={disable}
+                                size="large"
                             >
                                 Absen
                             </Button>
