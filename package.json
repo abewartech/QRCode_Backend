@@ -12,6 +12,7 @@
     "devDependencies": {
         "@babel/preset-react": "^7.18.6",
         "axios": "^0.21",
+        "clean-webpack-plugin": "^4.0.0",
         "file-loader": "^6.2.0",
         "laravel-mix": "^6.0.6",
         "react": "^17.0.2",
@@ -31,6 +32,8 @@
         "babel-preset-es2015": "^6.24.1",
         "dayjs": "^1.11.5",
         "geolib": "^3.3.3",
+        "laravel-mix-clean": "^0.1.0",
+        "laravel-mix-versionhash": "^2.0.1",
         "leaflet": "^1.9.1",
         "moment-timezone": "^0.5.37",
         "raw-loader": "^4.0.2",
