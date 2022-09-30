@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Events\QRScan;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
-use App\Models\QRCode;
-use App\Models\ScanHistory;
 use Carbon\Carbon;
 
 class HelperController extends Controller
@@ -22,6 +19,24 @@ class HelperController extends Controller
         return response()->json([
             'success' => true,
             'message' => $absen,
+        ], 200);
+    }
+
+    public function checkabsen()
+    {
+        $fixpulang = null;
+        $absen = Attendance::where('user_id', request('userId'))->whereDate('created_at', Carbon::now())->first();
+        $pulang = Attendance::where('user_id', request('userId'))->whereDate('created_at', Carbon::now())->get();
+
+        if (count($pulang) > 1) {
+            $fixpulang = $pulang[count($pulang) - 1];
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => $absen,
+            'isAbsen' => $absen ? true : false,
+            'pulang' => $fixpulang,
         ], 200);
     }
 }

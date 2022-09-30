@@ -1,10 +1,21 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Snackbar from "@mui/material/Snackbar";
 import axios from "axios";
 import { isPointWithinRadius } from "geolib";
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    Typography,
+    Snackbar,
+    Button,
+} from "@mui/material";
+import dayjs from "dayjs";
+import Clock from "react-live-clock";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import "dayjs/locale/id";
+dayjs.extend(customParseFormat);
+dayjs.locale("id");
 
 class Dashboard extends Component {
     state = {
@@ -13,8 +24,39 @@ class Dashboard extends Component {
         open: false,
         msg: "",
         disable: false,
+        isAbsenToday: false,
+        jamMasuk: "",
+        jamPulang: "",
     };
     componentDidMount = () => {
+        const data = {
+            userId: document
+                .querySelector("meta[name='user_id']")
+                .getAttribute("content"),
+        };
+        axios
+            .post("api/checkabsen", data)
+            .then((response) => {
+                console.log(response.data.message.created_at);
+                if (response.data.isAbsen) {
+                    this.setState({
+                        isAbsenToday: true,
+                        jamMasuk: dayjs(
+                            response.data.message.created_at
+                        ).format("HH:mm:ss"),
+                    });
+                }
+                if (response.data.pulang) {
+                    this.setState({
+                        jamPulang: dayjs(
+                            response.data.pulang.created_at
+                        ).format("HH:mm:ss"),
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         setTimeout(() => {
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -29,7 +71,8 @@ class Dashboard extends Component {
         }, 500);
     };
     render() {
-        const { lat, lng, open, msg, disable } = this.state;
+        const { lat, lng, open, msg, disable, isAbsenToday, jamMasuk, jamPulang } =
+            this.state;
         const absen = () => {
             if (lat && lng) {
                 if (
@@ -61,7 +104,7 @@ class Dashboard extends Component {
                             audio.load();
                             audio.addEventListener(
                                 "load",
-                                function() {
+                                function () {
                                     audio.play();
                                 },
                                 true
@@ -86,23 +129,100 @@ class Dashboard extends Component {
         };
         return (
             <>
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="center"
-                    spacing={2}
-                >
-                    <Grid item sm={12} md={6} style={{ marginTop: 20 }}>
-                        <Button
-                            variant="contained"
-                            onClick={absen}
-                            disabled={disable}
-                        >
-                            Absen
-                        </Button>
-                    </Grid>
-                </Grid>
+                <div class="container">
+                    <div
+                        className="row justify-content-center"
+                        style={{ marginTop: 20 }}
+                    >
+                        <div className="col-3">
+                            <Button
+                                variant="contained"
+                                onClick={absen}
+                                disabled={disable}
+                            >
+                                Absen
+                            </Button>
+                        </div>
+                    </div>
+                    <div className="row" style={{ marginTop: 120 }}>
+                        <div className="col-12">
+                            <Card>
+                                <CardHeader
+                                    title={
+                                        <Clock
+                                            format={"HH:mm:ss"}
+                                            ticking={true}
+                                            timezone={"Asia/Jakarta"}
+                                        />
+                                    }
+                                    subheader={dayjs().format(
+                                        "dddd, DD MMMM YYYY"
+                                    )}
+                                />
+                                <CardContent>
+                                    <div className="row">
+                                        <div className="col-7">
+                                            <Typography
+                                                variant="body1"
+                                                color="text.secondary"
+                                            >
+                                                Status Kehadiran :
+                                            </Typography>
+                                        </div>
+                                        <div className="col-5">
+                                            {isAbsenToday ? (
+                                                <Typography
+                                                    variant="body1"
+                                                    color="#00e640"
+                                                >
+                                                    Sudah Absen
+                                                </Typography>
+                                            ) : (
+                                                <Typography
+                                                    variant="body1"
+                                                    color="#f22613"
+                                                >
+                                                    Belum Absen
+                                                </Typography>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="row mt-2">
+                                        <div className="col-7">
+                                            <Typography
+                                                variant="body2"
+                                                color="text.secondary"
+                                            >
+                                                Waktu Datang :
+                                            </Typography>
+                                        </div>
+                                        <div className="col-5">
+                                            <Typography variant="body2">
+                                                {jamMasuk}
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                    <div className="row mt-1">
+                                        <div className="col-7">
+                                            <Typography
+                                                variant="body2"
+                                                color="text.secondary"
+                                            >
+                                                Waktu Pulang :
+                                            </Typography>
+                                        </div>
+                                        <div className="col-5">
+                                            <Typography variant="body2">
+                                                {jamPulang}
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    </div>
+                </div>
+
                 <Snackbar
                     open={open}
                     autoHideDuration={6000}
