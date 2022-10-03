@@ -71,8 +71,16 @@ class Dashboard extends Component {
         }, 500);
     };
     render() {
-        const { lat, lng, open, msg, disable, isAbsenToday, jamMasuk, jamPulang } =
-            this.state;
+        const {
+            lat,
+            lng,
+            open,
+            msg,
+            disable,
+            isAbsenToday,
+            jamMasuk,
+            jamPulang,
+        } = this.state;
         const absen = () => {
             if (lat && lng) {
                 if (
@@ -110,6 +118,38 @@ class Dashboard extends Component {
                                 true
                             );
                             audio.src = tinung;
+
+                            const data = {
+                                userId: document
+                                    .querySelector("meta[name='user_id']")
+                                    .getAttribute("content"),
+                            };
+                            
+                            axios
+                                .post("api/checkabsen", data)
+                                .then((response) => {
+                                    console.log(
+                                        response.data.message.created_at
+                                    );
+                                    if (response.data.isAbsen) {
+                                        this.setState({
+                                            isAbsenToday: true,
+                                            jamMasuk: dayjs(
+                                                response.data.message.created_at
+                                            ).format("HH:mm:ss"),
+                                        });
+                                    }
+                                    if (response.data.pulang) {
+                                        this.setState({
+                                            jamPulang: dayjs(
+                                                response.data.pulang.created_at
+                                            ).format("HH:mm:ss"),
+                                        });
+                                    }
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
                         })
                         .catch(function (error) {
                             console.log(error);
