@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AttExport;
 use App\Http\Requests\AttendanceRequest;
 use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Class AttendanceCrudController
@@ -30,6 +32,7 @@ class AttendanceCrudController extends CrudController
         CRUD::setModel(\App\Models\Attendance::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/attendance');
         CRUD::setEntityNameStrings('attendance', 'attendances');
+        $this->crud->denyAccess(['show', 'create', 'update', 'delete']);
     }
 
     /**
@@ -40,7 +43,8 @@ class AttendanceCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->removeAllButtons();
+        $this->crud->addButtonFromView('top', 'exportondemand', 'exportondemand', 'end');
+        // $this->crud->removeAllButtons();
         $this->crud->enableExportButtons();
         CRUD::column('id');
         CRUD::column('user_id')->type('select')->entity('userId')->attribute('name')->model('App\Models\User');
@@ -112,5 +116,10 @@ class AttendanceCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function historyexport($start, $end)
+    {
+        return Excel::download(new AttExport($start, $end), 'Attendance-' . $start . '-' . $end . '.xlsx');
     }
 }
