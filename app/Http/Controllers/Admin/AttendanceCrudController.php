@@ -122,4 +122,8 @@ class AttendanceCrudController extends CrudController
     {
         return Excel::download(new AttExport($start, $end), 'Attendance-' . $start . '-' . $end . '.xlsx');
     }
+
+    public function statistics(){
+        return view('statistics');
+    }
 }

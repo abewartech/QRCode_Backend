@@ -44,4 +44,5 @@ Route::group([
     Route::get('protap/{id}/preview', 'ProtapCrudController@previewpdf');
     Route::crud('attendance', 'AttendanceCrudController');
     Route::get('attendance/export/{start}/{end}', 'AttendanceCrudController@historyexport');
+    Route::get('statistics', 'AttendanceCrudController@statistics');
 }); // this should be the absolute last line of this file
