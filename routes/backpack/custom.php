@@ -42,4 +42,9 @@ Route::group([
     Route::get('jukref/{id}/preview', 'JukrefCrudController@previewpdf');
     Route::get('protap/{id}/download', 'ProtapCrudController@download');
     Route::get('protap/{id}/preview', 'ProtapCrudController@previewpdf');
+    Route::crud('doktrin-jalesveva-jayamahe', 'DoktrinJalesvevaJayamaheCrudController');
+    Route::get('doktrin-jalesveva-jayamahe/{id}/download', 'DoktrinJalesvevaJayamaheCrudController@download');
+    Route::get('doktrin-jalesveva-jayamahe/{id}/preview', 'DoktrinJalesvevaJayamaheCrudController@previewpdf');
+    Route::crud('bidang', 'BidangCrudController');
+    Route::crud('petunjuk', 'PetunjukCrudController');
 }); // this should be the absolute last line of this file

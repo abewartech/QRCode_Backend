@@ -1,8 +1,9 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i>
-        {{ trans('backpack::base.dashboard') }}</a></li>
+Stratifikasi Doktrin</a></li>
 <li class="nav-item nav-dropdown"><a class="nav-link nav-dropdown-toggle" href="#"><i
             class="nav-icon las la-server"></i> Doktrin</a>
     <ul class="nav-dropdown-items">
+    <li class='nav-item' style="padding-left: 0.1rem; font-weight: 300;"><a class='nav-link' href='{{ backpack_url('doktrin-jalesveva-jayamahe') }}'><i class='nav-icon las la-ship'></i> Doktrin Jalesveva Jayamahe</a></li>
         <li class='nav-item' style="padding-left: 0.1rem; font-weight: 300;"><a class='nav-link' href='{{ backpack_url('doktrin') }}'><i
                     class='nav-icon las la-file-alt'></i>
                 Doktrin Operasi</a></li>
@@ -41,3 +42,6 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i>
         <span>Users</span></a></li>
 @endrole
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('bidang') }}'><i class='nav-icon la la-question'></i> Bidangs</a></li>
+<!-- <li class='nav-item'><a class='nav-link' href='{{ backpack_url('petunjuk') }}'><i class='nav-icon la la-question'></i> Petunjuks</a></li> -->

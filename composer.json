@@ -9,12 +9,12 @@
         "backpack/crud": "4.1.*",
         "backpack/permissionmanager": "^6.0",
         "barryvdh/laravel-dompdf": "^1.0",
-        "endroid/qr-code": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "orangehill/iseed": "^3.0",
         "pusher/pusher-php-server": "^7.0",
         "simplesoftwareio/simple-qrcode": "^4.2"
     },
