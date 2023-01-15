@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\ProtapRequest;
+use App\Models\Bidang;
 use App\Models\Protap;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -52,6 +53,7 @@ class ProtapCrudController extends CrudController
         CRUD::column('id');
         CRUD::column('no_petunjuk');
         CRUD::column('name');
+        CRUD::column('bidang_id')->type('select')->entity('bidangId')->attribute('name')->model('App\Models\Bidang');
         CRUD::column('tgl');
         // CRUD::column('file');
         CRUD::column('pembina');
@@ -63,6 +65,18 @@ class ProtapCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+        $this->crud->addFilter([
+            'name' => 'bidang_id',
+            'type' => 'select2',
+            'label' => 'Bidang',
+        ], function () {
+            return Bidang::all()->pluck('name', 'id')->toArray();
+        }, function ($value) {
+            $value = json_decode($value);
+            if (!empty($value)) {
+                $this->crud->addClause('where', 'bidang_id', $value);
+            }
+        });
     }
 
     /**
@@ -81,6 +95,7 @@ class ProtapCrudController extends CrudController
         CRUD::field('tgl')->type('date');
         CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
         CRUD::field('pembina');
+        CRUD::field('bidang_id')->type('select2')->entity('bidangId')->attribute('name')->model('App\Models\Bidang');
         CRUD::field('is_protected')->type('checkbox');
         // CRUD::field('created_at');
         // CRUD::field('updated_at');

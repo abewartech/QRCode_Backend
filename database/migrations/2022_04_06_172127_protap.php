@@ -15,6 +15,7 @@ class Protap extends Migration
     {
         Schema::create('protaps', function (Blueprint $table) {
             $table->id();
+            $table->integer('bidang_id');
             $table->string('no_petunjuk');
             $table->string('name');
             $table->date('tgl');

@@ -36,4 +36,9 @@ class Protap extends Model
 
         $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
     }
+
+    public function bidangId()
+    {
+        return $this->belongsTo('App\Models\Bidang', 'bidang_id');
+    }
 }

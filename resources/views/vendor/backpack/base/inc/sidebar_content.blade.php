@@ -43,5 +43,5 @@ Stratifikasi Doktrin</a></li>
         <span>Users</span></a></li>
 @endrole
 
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('bidang') }}'><i class='nav-icon la la-question'></i> Bidangs</a></li>
+<!-- <li class='nav-item'><a class='nav-link' href='{{ backpack_url('bidang') }}'><i class='nav-icon la la-question'></i> Bidangs</a></li> -->
 <!-- <li class='nav-item'><a class='nav-link' href='{{ backpack_url('petunjuk') }}'><i class='nav-icon la la-question'></i> Petunjuks</a></li> -->

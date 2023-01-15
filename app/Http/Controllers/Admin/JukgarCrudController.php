@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\JukgarRequest;
+use App\Models\Bidang;
 use App\Models\Jukgar;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -32,10 +33,10 @@ class JukgarCrudController extends CrudController
         CRUD::setEntityNameStrings('jukgar', 'jukgars');
         if (backpack_user()->hasRole('user')) {
 //        if (!backpack_user()->can('view_protected_document')) {
- if (!count(backpack_user()->permissions) > 0) {  
-          $this->crud->addClause('where', 'is_protected', '0');
+            if (!count(backpack_user()->permissions) > 0) {
+                $this->crud->addClause('where', 'is_protected', '0');
+            }
         }
-    }
     }
 
     /**
@@ -52,12 +53,24 @@ class JukgarCrudController extends CrudController
         CRUD::column('id');
         CRUD::column('no_petunjuk');
         CRUD::column('name');
+        CRUD::column('bidang_id')->type('select')->entity('bidangId')->attribute('name')->model('App\Models\Bidang');
         CRUD::column('tgl');
         // CRUD::column('file');
         CRUD::column('pembina');
         // CRUD::column('created_at');
         // CRUD::column('updated_at');
-
+        $this->crud->addFilter([
+            'name' => 'bidang_id',
+            'type' => 'select2',
+            'label' => 'Bidang',
+        ], function () {
+            return Bidang::all()->pluck('name', 'id')->toArray();
+        }, function ($value) {
+            $value = json_decode($value);
+            if (!empty($value)) {
+                $this->crud->addClause('where', 'bidang_id', $value);
+            }
+        });
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -81,6 +94,7 @@ class JukgarCrudController extends CrudController
         CRUD::field('tgl')->type('date');
         CRUD::field('file')->type('upload')->upload(true)->disk('public_beneran');
         CRUD::field('pembina');
+        CRUD::field('bidang_id')->type('select2')->entity('bidangId')->attribute('name')->model('App\Models\Bidang');
         CRUD::field('is_protected')->type('checkbox');
         // CRUD::field('created_at');
         // CRUD::field('updated_at');

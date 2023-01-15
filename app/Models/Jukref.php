@@ -42,6 +42,10 @@ class Jukref extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function bidangId()
+    {
+        return $this->belongsTo('App\Models\Bidang', 'bidang_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -15,6 +15,7 @@ class Juknis extends Migration
     {
         Schema::create('juknis', function (Blueprint $table) {
             $table->id();
+            $table->integer('bidang_id');
             $table->string('no_petunjuk');
             $table->string('name');
             $table->date('tgl');
