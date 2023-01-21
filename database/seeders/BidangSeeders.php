@@ -16,10 +16,31 @@ class BidangSeeders extends Seeder
     {
         DB::table('bidangs')->insert([
             [
+                'name' => 'Bin Doktrin',
+            ],
+            [
+                'name' => 'Pengawasan',
+            ],
+            [
+                'name' => 'Perencanaan dan anggaran',
+            ],
+            [
+                'name' => 'Intelijen',
+            ],
+            [
                 'name' => 'Operasi',
             ],
             [
-                'name' => 'Intelejen',
+                'name' => 'Personil',
+            ],
+            [
+                'name' => 'Logistik',
+            ],
+            [
+                'name' => 'Dawilhanla',
+            ],
+            [
+                'name' => 'Komlek',
             ],
         ]);
     }
